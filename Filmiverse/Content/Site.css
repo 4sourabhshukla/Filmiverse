@@ -15,10 +15,21 @@
 .dl-horizontal dt {
     white-space: normal;
 }
+/* Set image width and height for preview purpose*/
+.thumb-image{
+    width:150px;
+    height:200px;    
+    border: 2px solid #003B62;
+}
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/* hghlighting active link in yellow*/
+a:active {
+    background-color: yellow;
 }

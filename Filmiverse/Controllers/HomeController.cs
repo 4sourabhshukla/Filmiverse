@@ -15,14 +15,14 @@ namespace Filmiverse.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Filmiverse's description page.";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Filmiverse's contact page.";
 
             return View();
         }
