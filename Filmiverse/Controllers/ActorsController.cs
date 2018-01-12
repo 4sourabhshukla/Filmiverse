@@ -20,6 +20,17 @@ namespace Filmiverse
             return View(db.Actors.ToList());
         }
 
+        //this method is called for autocomplete feature where Actor's name is to be used
+        [HttpPost]
+        public JsonResult Index(string Prefix)
+        {
+            //Searching records from list using LINQ query  
+            var ActorList = db.Actors.Where(a => a.Name.ToLower().StartsWith(Prefix.ToLower()))
+                .Select(a => a.Name).ToList();
+
+            return Json(ActorList, JsonRequestBehavior.AllowGet);
+        }
+
         // GET: Actors/Details/5
         public ActionResult Details(int? id)
         {

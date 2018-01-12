@@ -43,16 +43,10 @@
                 </table>
                 <div>
                     @{var actorlist = "";
-                        foreach (var actor in Model.Actors)
-                        {
-                            actorlist += actor + ";";
-                        }
                     }
 
                     @Html.ActionLink("Add", "Edit", new { id = 0, type = "Add", actors = actorlist })
                     @Html.ActionLink("Delete", "Edit", new { id = 0, type = "Delete", actors = actorlist })
-                    @*<input type="button" id="addActor" value="Add" />
-                        <input type="button" id="delActor" value="Delete" />*@
                 </div>
             </div>
         </div>
@@ -83,7 +77,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Poster, htmlAttributes: new { @class = "control-label col-md-2" })
-
+            @Html.HiddenFor(model => model.Poster)
             @if (Model?.Poster != null)
                 {
                     var base64 = Convert.ToBase64String(Model.Poster);
@@ -131,6 +125,22 @@
                         success: function (data) {
                             response($.map(data, function (producer) {
                                 return { label: producer, value: producer };
+                            }))
+                        }
+                    })
+                }
+            });
+
+            $('#actorTable input:text').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Actors/Index",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (actor) {
+                                return { label: actor, value: actor };
                             }))
                         }
                     })

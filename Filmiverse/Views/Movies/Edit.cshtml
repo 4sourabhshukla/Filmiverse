@@ -65,8 +65,6 @@
 
                     @Html.ActionLink("Add Row", "Edit", new { id = Model.Id, type = "add", actors = actorlist })
                     @Html.ActionLink("Delete Row", "Edit", new { id = Model.Id, type = "delete", actors = actorlist })
-                    @*<input type="button" id="addActor" value="Add" />
-                        <input type="button" id="delActor" value="Delete" />*@
                 </div>
             </div>
         </div>
@@ -145,6 +143,22 @@
                                 return { label: producer, value: producer };
                             }))
 
+                        }
+                    })
+                }
+            });
+
+            $('#actorTable input:text').autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/Actors/Index",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                            response($.map(data, function (actor) {
+                                return { label: actor, value: actor };
+                            }))
                         }
                     })
                 }
